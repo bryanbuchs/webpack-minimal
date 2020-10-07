@@ -1,0 +1,55 @@
+a {
+  color: @link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @hover-color;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: @visited-color;
+  }
+
+  &:focus {
+    outline-color: inherit;
+  }
+}
+
+.button {
+  display: inline-block;
+  border-radius: 3px;
+
+  background-color: @orange;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: @semibold;
+  .box-shadow();
+
+  &,
+  &:link,
+  &:visited {
+    color: @white;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten(@orange, 5%);
+    box-shadow: 0 0 5px 1px fade(#000000, 20%);
+  }
+
+  &:focus {
+    outline-offset: -4px;
+  }
+
+  &.wide {
+    display: block;
+    max-width: 240px;
+    text-align: center;
+  }
+}
