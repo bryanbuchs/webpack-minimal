@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <main>
+      <h1>Micromodal AXE Tests</h1>
+
+      <p>
+        <button data-micromodal-trigger="themodal">OPEN MODAL</button>
+      </p>
+
+      <div id="themodal" class="modal-wrapper" aria-hidden="true">
+        <div class="modal-overlay" data-micromodal-close>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="themodal-title"
+            class="modal-dialog"
+          >
+            <div class="modal-header">
+              <h3 class="modal-title" id="themodal-title">
+                Modal Title
+              </h3>
+              <button
+                class="modal-close"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </div>
+            <div class="modal-content">
+              <p>
+                Modal Content. <a href="http://example.com">Link</a> inside
+                modal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        <a href="http://example.com">Link outside modal</a> amet consectetur
+        adipisicing, elit. A magni iure, exercitationem quis, iusto repellendus
+        sequi saepe molestias debitis, quos asperiores. Consectetur mollitia
+        repudiandae, eius, porro eum repellendus nostrum est itaque sequi quo
+        sed excepturi quam ex incidunt rem error dolorem accusantium harum
+        eligendi, velit. Corrupti harum at labore voluptatibus. Dolores
+        accusamus atque, tempore cumque voluptate nisi, at esse ducimus
+        consequuntur corrupti, qui ut obcaecati sequi eveniet iusto possimus
+        incidunt? Eveniet pariatur culpa laudantium similique repudiandae
+        recusandae dolorum aperiam fuga, iusto cumque placeat, dolorem. Earum,
+        voluptas. Quis, dignissimos porro voluptas, veniam totam dolore quam
+        consequatur perferendis iusto, in, inventore.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing, elit. A magni iure,
+        exercitationem quis, iusto repellendus sequi saepe molestias debitis,
+        quos asperiores. Consectetur mollitia repudiandae, eius, porro eum
+        repellendus nostrum est itaque sequi quo sed excepturi quam ex incidunt
+        rem error dolorem accusantium harum eligendi, velit. Corrupti harum at
+        labore voluptatibus. Dolores accusamus atque, tempore cumque voluptate
+        nisi, at esse ducimus consequuntur corrupti, qui ut obcaecati sequi
+        eveniet iusto possimus incidunt? Eveniet pariatur culpa laudantium
+        similique repudiandae recusandae dolorum aperiam fuga, iusto cumque
+        placeat, dolorem. Earum, voluptas. Quis, dignissimos porro voluptas,
+        veniam totam dolore quam consequatur perferendis iusto, in, inventore.
+      </p>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing, elit. A magni iure,
+        exercitationem quis, iusto repellendus sequi saepe molestias debitis,
+        quos asperiores. Consectetur mollitia repudiandae, eius, porro eum
+        repellendus nostrum est itaque sequi quo sed excepturi quam ex incidunt
+        rem error dolorem accusantium harum eligendi, velit. Corrupti harum at
+        labore voluptatibus. Dolores accusamus atque, tempore cumque voluptate
+        nisi, at esse ducimus consequuntur corrupti, qui ut obcaecati sequi
+        eveniet iusto possimus incidunt? Eveniet pariatur culpa laudantium
+        similique repudiandae recusandae dolorum aperiam fuga, iusto cumque
+        placeat, dolorem. Earum, voluptas. Quis, dignissimos porro voluptas,
+        veniam totam dolore quam consequatur perferendis iusto, in, inventore.
+      </p>
+    </main>
+  </body>
+</html>
