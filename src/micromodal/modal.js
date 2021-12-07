@@ -1,32 +1,23 @@
 import './modal.less'
 import MicroModal from 'micromodal'
 import { hideOthers } from 'aria-hidden'
-import * as focusTrap from 'focus-trap' // ESM
 
-const modals = Array.from(document.querySelectorAll('.modal-dialog'))
+let restore = null
 
-modals.forEach(dialog => {
-  let undo = null
-  // let trap = focusTrap.createFocusTrap(dialog, {
-  //   onActivate: () => console.log('onActivate'),
-  //   onDeactivate: () => console.log('onDeactivate'),
-  //   escapeDeactivates: false,
-  //   allowOutsideClick: false,
-  //   returnFocusOnDeactivate: false
-  // })
-
-  const options = {
-    // awaitOpenAnimation: true,
-    // awaitCloseAnimation: true,
-    onShow: modal => {
-      undo = hideOthers(dialog)
-      // trap.activate()
-    },
-    onClose: modal => {
-      undo()
-      // trap.deactivate()
-    }
+const options = {
+  awaitOpenAnimation: true,
+  awaitCloseAnimation: true,
+  disableFocus: true, // manually managed
+  onShow: modal => {
+    restore = hideOthers(modal)
+    modal.querySelector('div[role="dialog"]').focus()
+  },
+  onClose: modal => {
+    restore()
+    document
+      .querySelector(`button[data-micromodal-trigger="${modal.id}"]`)
+      .focus()
   }
+}
 
-  MicroModal.init(options)
-})
+MicroModal.init(options)

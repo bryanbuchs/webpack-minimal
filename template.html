@@ -8,8 +8,10 @@
     <main>
       <h1>Micromodal AXE Tests</h1>
 
+      <h2>Modal with inline link: <span class="pass">PASS</span></h2>
+
       <p>
-        <button data-micromodal-trigger="themodal">OPEN MODAL</button>
+        <button data-micromodal-trigger="themodal">OPEN MODAL 1</button>
       </p>
 
       <div id="themodal" class="modal-wrapper" aria-hidden="true">
@@ -19,6 +21,7 @@
             aria-modal="true"
             aria-labelledby="themodal-title"
             class="modal-dialog"
+            tabindex="-1"
           >
             <div class="modal-header">
               <h3 class="modal-title" id="themodal-title">
@@ -46,14 +49,47 @@
         sequi saepe molestias debitis, quos asperiores. Consectetur mollitia
         repudiandae, eius, porro eum repellendus nostrum est itaque sequi quo
         sed excepturi quam ex incidunt rem error dolorem accusantium harum
-        eligendi, velit. Corrupti harum at labore voluptatibus. Dolores
-        accusamus atque, tempore cumque voluptate nisi, at esse ducimus
-        consequuntur corrupti, qui ut obcaecati sequi eveniet iusto possimus
-        incidunt? Eveniet pariatur culpa laudantium similique repudiandae
-        recusandae dolorum aperiam fuga, iusto cumque placeat, dolorem. Earum,
-        voluptas. Quis, dignissimos porro voluptas, veniam totam dolore quam
-        consequatur perferendis iusto, in, inventore.
+        eligendi, velit. Corrupti harum at labore voluptatibus.
       </p>
+
+      <h2>Modal with no links or buttons: <span class="fail">FAIL</span></h2>
+
+      <p>
+        <button data-micromodal-trigger="themodal2">OPEN MODAL 2</button>
+      </p>
+
+      <div id="themodal2" class="modal-wrapper" aria-hidden="true">
+        <div class="modal-overlay" data-micromodal-close>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="themodal2-title"
+            class="modal-dialog"
+            tabindex="-1"
+          >
+            <div class="modal-header">
+              <h3 class="modal-title" id="themodal2-title">
+                Modal Title
+              </h3>
+              <button
+                class="modal-close"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </div>
+            <div class="modal-content">
+              <p>
+                Modal Content. No focusable elements here, just text.
+              </p>
+              <button
+                class="visually-hidden"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing, elit. A magni iure,
@@ -61,13 +97,51 @@
         quos asperiores. Consectetur mollitia repudiandae, eius, porro eum
         repellendus nostrum est itaque sequi quo sed excepturi quam ex incidunt
         rem error dolorem accusantium harum eligendi, velit. Corrupti harum at
-        labore voluptatibus. Dolores accusamus atque, tempore cumque voluptate
-        nisi, at esse ducimus consequuntur corrupti, qui ut obcaecati sequi
-        eveniet iusto possimus incidunt? Eveniet pariatur culpa laudantium
-        similique repudiandae recusandae dolorum aperiam fuga, iusto cumque
-        placeat, dolorem. Earum, voluptas. Quis, dignissimos porro voluptas,
-        veniam totam dolore quam consequatur perferendis iusto, in, inventore.
+        labore voluptatibus.
       </p>
+
+      <h2>
+        Modal with second close button, visually-hidden:
+        <span class="pass">PASS</span>
+      </h2>
+
+      <p>
+        <button data-micromodal-trigger="themodal3">OPEN MODAL 3</button>
+      </p>
+
+      <div id="themodal3" class="modal-wrapper" aria-hidden="true">
+        <div class="modal-overlay" data-micromodal-close>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="themodal3-title"
+            class="modal-dialog"
+            tabindex="-1"
+          >
+            <div class="modal-header">
+              <h3 class="modal-title" id="themodal3-title">
+                Modal Title
+              </h3>
+              <button
+                class="modal-close"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </div>
+            <div class="modal-content">
+              <p>
+                Modal Content. No focusable elements here, but there's a
+                visually hidden close button after this paragraph.
+              </p>
+              <button
+                class="visually-hidden"
+                aria-label="Close modal"
+                data-micromodal-close
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing, elit. A magni iure,
@@ -75,12 +149,7 @@
         quos asperiores. Consectetur mollitia repudiandae, eius, porro eum
         repellendus nostrum est itaque sequi quo sed excepturi quam ex incidunt
         rem error dolorem accusantium harum eligendi, velit. Corrupti harum at
-        labore voluptatibus. Dolores accusamus atque, tempore cumque voluptate
-        nisi, at esse ducimus consequuntur corrupti, qui ut obcaecati sequi
-        eveniet iusto possimus incidunt? Eveniet pariatur culpa laudantium
-        similique repudiandae recusandae dolorum aperiam fuga, iusto cumque
-        placeat, dolorem. Earum, voluptas. Quis, dignissimos porro voluptas,
-        veniam totam dolore quam consequatur perferendis iusto, in, inventore.
+        labore voluptatibus.
       </p>
     </main>
   </body>
