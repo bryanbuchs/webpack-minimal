@@ -4,3 +4,5 @@
 // })
 
 import './less/index.less'
+
+console.log('testing')
