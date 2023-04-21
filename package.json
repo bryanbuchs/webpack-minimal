@@ -1,6 +1,6 @@
 {
   "name": "webpack-minimal",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "simple webpack demo, single entry/output",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "css-minimizer-webpack-plugin": "^5.0.0",
     "less": "^4.1.2",
     "less-loader": "^11.0.0",
-    "less-plugin-glob": "^3.0.0",
+    "less-plugin-glob": "^2.0.2",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.8",
     "postcss-combine-media-query": "^1.0.1",
