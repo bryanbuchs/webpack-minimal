@@ -2,10 +2,12 @@
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
+const pkg = require('./package.json')
 const LessPluginGlob = require('less-plugin-glob')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const WebpackShellPluginNext = require('webpack-shell-plugin-next')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 // ==================================
 
@@ -32,7 +34,7 @@ const config = {
     const [key] = path.dirname(el).split('/').slice(-1)
     result[key] = {
       import: path.resolve(__dirname, el),
-      filename: `js/[name].js` // // "js/first.js"
+      filename: `js/${pkg.name}.[name].js` // // "js/webpack-minimal.first.js"
       // filename: `[name]/[name].js` // "first/first.js"
     }
     return result
@@ -43,9 +45,12 @@ const config = {
     clean: true
   },
 
+  stats: 'errors-warnings',
+  devtool: 'source-map',
+
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()]
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
   },
 
   module: {
@@ -109,7 +114,7 @@ const config = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css' // css/first.css
+      filename: `css/${pkg.name}.[name].css` // css/webpack-minimal.first.css
       // filename: '[name]/[name].css' // first/first.css
     })
   ]
