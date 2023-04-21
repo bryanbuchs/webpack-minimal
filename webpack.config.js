@@ -1,4 +1,4 @@
-// const webpack = require('webpack')
+const webpack = require('webpack')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
@@ -12,6 +12,11 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 // ==================================
 
 const entryFiles = glob.sync('./src/**/index.js')
+
+// const bannerText = `/*!
+//  * ${pkg.name} v${pkg.version}
+//  * ${pkg.description}
+//  */`
 
 const removeEmptyFiles = () => {
   // get all build files from the dist folder, and if
@@ -34,8 +39,8 @@ const config = {
     const [key] = path.dirname(el).split('/').slice(-1)
     result[key] = {
       import: path.resolve(__dirname, el),
-      filename: `js/${pkg.name}.[name].js` // // "js/webpack-minimal.first.js"
-      // filename: `[name]/[name].js` // "first/first.js"
+      filename: `js/${pkg.name}.[name].js` // group by ext: "js/webpack-minimal.first.js"
+      // filename: `[name]/${pkg.name}.[name].js` // group by bundle: "first/webpack-minimal.first.js"
     }
     return result
   }, {}),
@@ -48,17 +53,17 @@ const config = {
   stats: 'errors-warnings',
   devtool: 'source-map',
 
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()]
-  },
-
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: ['babel-loader', 'webpack-import-glob-loader'],
-        exclude: /node_modules/
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
       {
         test: /\.css$/,
@@ -106,7 +111,39 @@ const config = {
       }
     ]
   },
+
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        extractComments: false,
+        terserOptions: {
+          output: {
+            // preamble: bannerText,
+            comments: false
+          }
+        }
+      }),
+      new CssMinimizerPlugin({
+        parallel: true,
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              svgo: false
+            }
+          ]
+        }
+      })
+    ]
+  },
+
   plugins: [
+    // new webpack.BannerPlugin({
+    //   raw: true,
+    //   banner: bannerText
+    // }),
     new WebpackShellPluginNext({
       onAfterDone: {
         scripts: [removeEmptyFiles],
