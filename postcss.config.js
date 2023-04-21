@@ -1,3 +1,12 @@
 module.exports = {
-  plugins: [require('autoprefixer')(), require('postcss-combine-media-query')()]
+  plugins: [
+    require('postcss-inline-svg')({}),
+    require('postcss-url')({
+      url: 'inline',
+      maxSize: 10,
+      optimizeSvgEncode: true
+    }),
+    require('postcss-combine-media-query'),
+    require('autoprefixer')
+  ]
 }
