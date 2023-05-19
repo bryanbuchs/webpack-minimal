@@ -11,12 +11,24 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 // ==================================
 
-const entryFiles = glob.sync('./src/**/index.js')
+// group by folder, or by filetype
+const groupOptions = {
+  type: {
+    js: `js/${pkg.name}.[name].js`,
+    css: `css/${pkg.name}.[name].css`
+  },
+  folder: {
+    js: `[name]/${pkg.name}.[name].js`,
+    css: `[name]/${pkg.name}.[name].css`
+  }
+}
 
-// const bannerText = `/*!
-//  * ${pkg.name} v${pkg.version}
-//  * ${pkg.description}
-//  */`
+// choose one: type/bundle
+const grouping = groupOptions['folder']
+
+// ==================================
+
+const entryFiles = glob.sync('./src/**/index.js')
 
 const removeEmptyFiles = () => {
   // get all build files from the dist folder, and if
@@ -39,8 +51,7 @@ const config = {
     const [key] = path.dirname(el).split('/').slice(-1)
     result[key] = {
       import: path.resolve(__dirname, el),
-      filename: `js/${pkg.name}.[name].js` // group by ext: "js/webpack-minimal.first.js"
-      // filename: `[name]/${pkg.name}.[name].js` // group by bundle: "first/webpack-minimal.first.js"
+      filename: grouping.js
     }
     return result
   }, {}),
@@ -52,6 +63,9 @@ const config = {
 
   stats: 'errors-warnings',
   devtool: 'source-map',
+  performance: {
+    hints: false
+  },
 
   module: {
     rules: [
@@ -61,7 +75,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env']
+            presets: [['@babel/preset-env', { targets: 'defaults' }]]
           }
         }
       },
@@ -120,7 +134,6 @@ const config = {
         extractComments: false,
         terserOptions: {
           output: {
-            // preamble: bannerText,
             comments: false
           }
         }
@@ -140,10 +153,6 @@ const config = {
   },
 
   plugins: [
-    // new webpack.BannerPlugin({
-    //   raw: true,
-    //   banner: bannerText
-    // }),
     new WebpackShellPluginNext({
       onAfterDone: {
         scripts: [removeEmptyFiles],
@@ -151,8 +160,7 @@ const config = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: `css/${pkg.name}.[name].css` // css/webpack-minimal.first.css
-      // filename: '[name]/[name].css' // first/first.css
+      filename: grouping.css
     })
   ]
 }
