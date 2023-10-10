@@ -9,7 +9,7 @@
   },
   "author": "bryan@kapowinc.com",
   "devDependencies": {
-    "@babel/core": "^7.22.9",
+    "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.9",
     "autoprefixer": "^10.4.16",
     "babel-loader": "^9.1.3",
