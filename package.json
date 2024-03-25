@@ -18,7 +18,7 @@
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
     "less-plugin-glob": "^3.0.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "mini-css-extract-plugin": "^2.8.1",
     "postcss": "^8.4.32",
     "postcss-combine-media-query": "^1.0.1",
     "postcss-inline-svg": "^6.0.0",
