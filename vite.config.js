@@ -1,8 +1,7 @@
 // vite.config.js
-const fs = require('fs')
-const path = require('path')
-
-const { defineConfig } = require('vite')
+import fs from 'fs'
+import path from 'path'
+import { defineConfig } from 'vite'
 
 function getEntries(dir, parent = '') {
   let entries = {}
@@ -49,24 +48,27 @@ function getLessImports(dir, parent = '') {
 const lessDir = path.resolve(__dirname, 'less')
 const globalLessVars = getLessImports(lessDir)
 
-module.exports = defineConfig({
-  // plugins: [vitePluginPostcss()],
+export default defineConfig({
+  base: './',
   build: {
     rollupOptions: {
       input: entries,
       output: {
         dir: './dist/',
-        entryFileNames: '[name]/[name].js',
-        chunkFileNames: '[name]/[name].js',
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
         assetFileNames: '[name].[ext]'
       }
     },
-    publicPath: './',
+    sourcemap: true,
+    publicPath: '',
     cssCodeSplit: true
   },
   css: {
     preprocessorOptions: {
       less: {
+        math: 'strict',
+        // plugins: [require('less-plugin-glob')],
         additionalData: `${globalLessVars}`
       }
     }
