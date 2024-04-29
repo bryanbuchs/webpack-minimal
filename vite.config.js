@@ -15,7 +15,6 @@ function getEntries(dir, parent = '') {
       const newParent = parent ? `${parent}/${file}` : file
       entries = { ...entries, ...getEntries(fullPath, newParent) }
     } else if (file.endsWith('.library.js')) {
-      console.log(parent)
       const name = `${path.basename(file, '.library.js')}`
       entries[name] = fullPath
     }
@@ -26,27 +25,20 @@ function getEntries(dir, parent = '') {
 const componentsDir = path.resolve(__dirname, 'components')
 const entries = getEntries(componentsDir)
 
-function getLessImports(dir, parent = '') {
-  let imports = ''
-  const files = fs.readdirSync(dir)
+// get a list of the folders in the /less/ directory and set up
+// an @import statement for each one using the glob plugin to
+// import all .less files in each folder
+function getLessImports() {
+  const lessDir = path.resolve(__dirname, 'less')
+  const imports = fs
+    .readdirSync(lessDir)
+    .filter((file) => fs.statSync(path.join(lessDir, file)).isDirectory())
+    .map((dir) => `@import (reference) './less/${dir}/*.less';`)
 
-  for (const file of files) {
-    const fullPath = path.join(dir, file)
-    const stat = fs.statSync(fullPath)
-
-    if (stat.isDirectory()) {
-      const newParent = parent ? `${parent}/${file}` : file
-      imports += getLessImports(fullPath, newParent)
-    } else if (file.endsWith('.less')) {
-      const importPath = `./less/${parent}/${file}`
-      imports += `@import (reference) '${importPath}';\n`
-    }
-  }
-  return imports
+  return imports.join('\n')
 }
 
-const lessDir = path.resolve(__dirname, 'less')
-const globalLessVars = getLessImports(lessDir)
+const globalLessVars = getLessImports()
 
 export default defineConfig({
   base: './',
@@ -68,7 +60,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         math: 'strict',
-        // plugins: [require('less-plugin-glob')],
+        plugins: [require('less-plugin-glob')],
         additionalData: `${globalLessVars}`
       }
     }
