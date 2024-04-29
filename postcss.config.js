@@ -6,7 +6,6 @@ module.exports = {
       maxSize: 10,
       optimizeSvgEncode: true
     }),
-    require('postcss-combine-media-query'),
     require('autoprefixer')
   ]
 }

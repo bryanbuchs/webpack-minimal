@@ -1,0 +1,19 @@
+.entity-card {
+  // style stuff
+  background: @background;
+  color: @text-color;
+
+  .media {
+    background-image: url(./photo.jpg);
+    background-repeat: no-repeat;
+  }
+
+  a {
+    color: @link-color;
+
+    &:hover,
+    &:focus {
+      color: @hover-color;
+    }
+  }
+}
