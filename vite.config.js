@@ -49,7 +49,28 @@ export default defineConfig({
         dir: 'dist',
         entryFileNames: '[name]/[name].js',
         chunkFileNames: '[name]/[name].js',
-        assetFileNames: '[name]/[name].[ext]'
+        assetFileNames: assetInfo => {
+          // set an output path for each asset depending on the file extension
+
+          const extension = path.extname(assetInfo.name).slice(1)
+          let fileNames = '[name]'
+
+          switch (extension) {
+            case 'woff':
+            case 'woff2':
+              fileNames = 'fonts'
+              break
+
+            case 'jpg':
+            case 'gif':
+            case 'png':
+            case 'svg':
+              fileNames = 'images'
+              break
+          }
+
+          return `${fileNames}/[name].[ext]`
+        }
       }
     },
     sourcemap: true,
