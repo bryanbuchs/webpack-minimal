@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 
-function getEntries(dir, parent = '') {
+function getEntries (dir, parent = '') {
   let entries = {}
   const files = fs.readdirSync(dir)
 
@@ -28,12 +28,12 @@ const entries = getEntries(componentsDir)
 // get a list of the folders in the /less/ directory and set up
 // an @import statement for each one using the glob plugin to
 // import all .less files in each folder
-function getLessImports() {
+function getLessImports () {
   const lessDir = path.resolve(__dirname, 'less')
   const imports = fs
     .readdirSync(lessDir)
-    .filter((file) => fs.statSync(path.join(lessDir, file)).isDirectory())
-    .map((dir) => `@import (reference) './less/${dir}/*.less';`)
+    .filter(file => fs.statSync(path.join(lessDir, file)).isDirectory())
+    .map(dir => `@import (reference) './less/${dir}/*.less';`)
 
   return imports.join('\n')
 }
@@ -46,10 +46,10 @@ export default defineConfig({
     rollupOptions: {
       input: entries,
       output: {
-        dir: './dist/',
-        entryFileNames: '[name].js',
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
+        dir: 'dist',
+        entryFileNames: '[name]/[name].js',
+        chunkFileNames: '[name]/[name].js',
+        assetFileNames: '[name]/[name].[ext]'
       }
     },
     sourcemap: true,
