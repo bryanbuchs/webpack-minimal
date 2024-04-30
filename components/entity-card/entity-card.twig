@@ -1,17 +1,19 @@
 {{ attach_library('webpack-minimal/entity-card') }}
 
-{%
-  set config = [
+{% set config = [
     'entity',
     'entity-card',
-  ]
-%}
+  ] %}
 
-<div{{ attributes.setAttribute('class', config) }}>
+<div{{ attributes.setAttribute('class',config) }}>
 
-    {{ image }}
-    {{ heading }}
-    {{ link }}
-    {{ text }}
+  {{ image }}<br>
+  {{ heading }}<br>
+  {{ link }}<br>
+  {{ text }}<br>
+
+  <div class="local"></div>
+
+  <div class="shared"></div>
 
 </div>

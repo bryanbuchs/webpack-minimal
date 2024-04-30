@@ -5,6 +5,10 @@ import fs from 'fs'
 import path from 'path'
 import pkg from './package.json'
 import VitePluginBrowserSync from 'vite-plugin-browser-sync'
+import twig from 'vite-plugin-twig-drupal'
+import lessPluginGlob from 'less-plugin-glob'
+// import { join } from 'node:path'
+// import DrupalAttribute from 'drupal-attribute'
 
 function getEntries(dir, parent = '') {
   let entries = {}
@@ -95,7 +99,7 @@ export default defineConfig({
       less: {
         additionalData: getLessImports(),
         math: 'strict',
-        plugins: [require('less-plugin-glob')],
+        plugins: [lessPluginGlob]
         // sourceMap: true
       }
     }
@@ -108,7 +112,32 @@ export default defineConfig({
     VitePluginBrowserSync({
       dev: { enable: false },
       preview: { enable: false },
-      buildWatch: { enable: true, ...bsOptions },
+      buildWatch: { enable: true, ...bsOptions }
+    }),
+    twig({
+      // namespaces: {
+      //   components: join(__dirname, 'components')
+      //   // Other namespaces as required.
+      // },
+      // functions: {
+      //   // You can add custom functions - each is a function that is passed the active Twig instance and should call
+      //   // e.g. extendFunction to register a function
+      //   create_attribute: (twigInstance) =>
+      //     twigInstance.extendFunction(
+      //       'create_attribute',
+      //       () => () => new DrupalAttribute()
+      //     ),
+      //   // e.g. extendFilter to register a filter
+      //   typography: (twigInstance) =>
+      //     twigInstance.extendFilter('typography', () => (text) => text),
+      //   clean_unique_id: (twigInstance) =>
+      //     twigInstance.extendFilter('clean_unique_id', () => (text) => text)
+      // },
+      // globalContext: {
+      //   // Global variables that should be present in all templates.
+      //   active_theme: pkg.name,
+      //   is_front_page: false
+      // }
     })
   ]
 })

@@ -1,11 +1,23 @@
 .paragraph-cards {
   background-color: @offwhite;
+  display: flex;
+
+
+  h1, h2, h3, h4 {
+    aspect-ratio: 1 / 1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100px;
+    outline: 1px dotted red;
+  }
+
 
   h1 {
     // node_modules
     background-image: svg-load(
       '@fortawesome/fontawesome-free/svgs/solid/lightbulb.svg',
-      fill= @dark-purple
+      fill= @black
     );
   }
 

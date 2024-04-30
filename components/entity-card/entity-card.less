@@ -1,16 +1,23 @@
 .entity-card {
   background: @background;
   color: @text-color;
+  max-width: 400px;
+
+  .local,
+  .shared {
+    background-repeat: no-repeat;
+    aspect-ratio: 16 / 9;
+    background-position: center;
+    background-size: contain;
+  }
 
   .local {
     // image specific to this component
     background-image: url(photo.jpg);
-    background-repeat: no-repeat;
   }
 
   .shared {
     // shared image
     background-image: url(../../images/logoipsum.png);
-    background-repeat: no-repeat;
   }
 }

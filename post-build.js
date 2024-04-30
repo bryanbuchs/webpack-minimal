@@ -1,9 +1,9 @@
 // post-build.js
 
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
-function isOnlyComments(content) {
+function isOnlyComments (content) {
   const noInlineComments = content.replace(/\/\/.*/g, '').trim()
   const noBlockComments = noInlineComments
     .replace(/\/\*[\s\S]*?\*\//g, '')
@@ -11,7 +11,7 @@ function isOnlyComments(content) {
   return noBlockComments.length === 0
 }
 
-function removeCommentOnlyFiles(directory) {
+function removeCommentOnlyFiles (directory) {
   const files = fs.readdirSync(directory)
 
   for (const file of files) {

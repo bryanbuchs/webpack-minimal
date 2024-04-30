@@ -1,13 +1,18 @@
-module.exports = {
+
+import autoprefixer from 'autoprefixer'
+import inlineSvg from 'postcss-inline-svg'
+import url from 'postcss-url'
+
+export default {
   plugins: [
-    require('postcss-inline-svg')({
+    inlineSvg({
       paths: ['node_modules/@fortawesome/fontawesome-free/svgs/', 'node_modules', 'images']
     }),
-    require('postcss-url')({
+    url({
       url: 'inline',
       maxSize: 10,
       optimizeSvgEncode: true
     }),
-    require('autoprefixer')
+    autoprefixer
   ]
 }
