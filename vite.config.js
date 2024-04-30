@@ -73,6 +73,7 @@ export default defineConfig({
         }
       }
     },
+    reportCompressedSize: false,
     sourcemap: true,
     publicPath: '',
     cssCodeSplit: true

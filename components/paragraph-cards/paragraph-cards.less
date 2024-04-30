@@ -1,7 +1,19 @@
 .paragraph-cards {
-  display: flex;
+  h1 {
+    // node_modules
+    background-image: svg-load(
+      '@fortawesome/fontawesome-free/svgs/solid/lightbulb.svg',
+      fill= @dark-purple
+    );
+  }
 
   h2 {
-    background: svg-load('check.svg', fill= @dark-orange);
+    // local
+    background-image: svg-load('calendar.svg', fill= @dark-orange);
+  }
+
+  h3 {
+    // shared images
+    background-image: svg-load('compass.svg', fill= @dark-teal);
   }
 }
