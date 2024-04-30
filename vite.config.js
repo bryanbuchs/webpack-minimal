@@ -1,8 +1,10 @@
 // vite.config.js
 import fs from 'fs'
+import pkg from './package.json'
 import path from 'path'
 import { defineConfig } from 'vite'
 import VitePluginBrowserSync from 'vite-plugin-browser-sync'
+import banner from 'vite-plugin-banner'
 
 function getEntries(dir, parent = '') {
   let entries = {}
@@ -94,9 +96,18 @@ export default defineConfig({
     }
   },
   plugins: [
+    banner((fileName) => {
+      console.log(fileName)
+      const banner = `/**
+ * DO NOT EDIT - GENERATED FROM SOURCE
+ * file: ${fileName}
+ * version: v${pkg.version}
+ */`
+      return banner
+    }),
     VitePluginBrowserSync({
       dev: {
-        enable: false,
+        enable: false
       },
       buildWatch: {
         enable: true,
@@ -104,7 +115,7 @@ export default defineConfig({
           ghostMode: false,
           host: 'localhost',
           port: 8008,
-          proxy: 'https://stanford-b2b.lndo.site',
+          proxy: 'https://stanford-b2b.lndo.site'
           // ui: false,
           // open: true
         }

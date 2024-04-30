@@ -15,3 +15,7 @@
   * the shared `/images` folder
   * installed in `node_modules`
   * A FontAwesome icon, using the pattern `[solid|regular|brands]/[icon].svg`
+
+## TODO
+
+- [ ] remove empty build files (`[name]/[name].js`) for css-only components
