@@ -2,6 +2,7 @@
 import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
+import VitePluginBrowserSync from 'vite-plugin-browser-sync'
 
 function getEntries(dir, parent = '') {
   let entries = {}
@@ -91,5 +92,23 @@ export default defineConfig({
         sourceMap: true
       }
     }
-  }
+  },
+  plugins: [
+    VitePluginBrowserSync({
+      dev: {
+        enable: false,
+      },
+      buildWatch: {
+        enable: true,
+        bs: {
+          ghostMode: false,
+          host: 'localhost',
+          port: 8008,
+          proxy: 'https://stanford-b2b.lndo.site',
+          // ui: false,
+          // open: true
+        }
+      }
+    })
+  ]
 })

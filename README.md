@@ -1,7 +1,8 @@
 # Quick Start
 
 - `npm run build` compiles and optimizes the output
-- `npm run watch` watches files for changes in [`components`,`less`,`images`], and compiles the results to `dist/`
+- `npm start` watches files for changes in [`components`,`less`,`images`], and compiles the results to `dist/`. Also starts a browsersync instance with a proxy to a lando server
+
 ## Notes
 
 * `components` are expected to follow the conventions from https://github.com/bryanbuchs/generator-component (`yo generate component`)
@@ -14,7 +15,3 @@
   * the shared `/images` folder
   * installed in `node_modules`
   * A FontAwesome icon, using the pattern `[solid|regular|brands]/[icon].svg`
-
-## TODO
-
-- [ ] `npm start` runs the watch task and starts a browsersync instance with a proxy to a lando server
