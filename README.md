@@ -1,7 +1,7 @@
 # Quick Start
 
 - `npm run build` compiles and optimizes the output
-- `npm start` watches files for changes in [`components`,`less`,`images`], and compiles the results to `dist/`. Also starts a browsersync instance with a proxy to a lando server
+- `npm start` watches files for changes in any linked files (`import from...` or `background-image:...`), and compiles the results to `dist/`. Also starts a browsersync instance with a proxy to a lando server
 
 ## Notes
 

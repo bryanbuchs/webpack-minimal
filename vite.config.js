@@ -1,10 +1,10 @@
 // vite.config.js
-import fs from 'fs'
-import pkg from './package.json'
-import path from 'path'
 import { defineConfig } from 'vite'
-import VitePluginBrowserSync from 'vite-plugin-browser-sync'
 import banner from 'vite-plugin-banner'
+import fs from 'fs'
+import path from 'path'
+import pkg from './package.json'
+import VitePluginBrowserSync from 'vite-plugin-browser-sync'
 
 function getEntries(dir, parent = '') {
   let entries = {}
@@ -41,7 +41,14 @@ function getLessImports() {
   return imports.join('\n')
 }
 
-const globalLessVars = getLessImports()
+const bsOptions = {
+  bs: {
+    ghostMode: false,
+    host: 'localhost',
+    port: 8008,
+    proxy: 'https://stanford-b2b.lndo.site'
+  }
+}
 
 export default defineConfig({
   base: './',
@@ -51,9 +58,6 @@ export default defineConfig({
     publicPath: '',
     reportCompressedSize: false,
     sourcemap: true,
-    watch: {
-      include: ['components/**/*', 'images/**/*', 'less/**/*']
-    },
     rollupOptions: {
       input: entries,
       output: {
@@ -88,7 +92,7 @@ export default defineConfig({
     devSourcemap: true,
     preprocessorOptions: {
       less: {
-        additionalData: globalLessVars,
+        additionalData: getLessImports(),
         math: 'strict',
         plugins: [require('less-plugin-glob')],
         sourceMap: true
@@ -97,29 +101,13 @@ export default defineConfig({
   },
   plugins: [
     banner((fileName) => {
-      console.log(fileName)
-      const banner = `/**
- * DO NOT EDIT - GENERATED FROM SOURCE
- * file: ${fileName}
- * version: v${pkg.version}
- */`
+      const banner = `/**\n * DO NOT EDIT - GENERATED FROM SOURCE\n * file: ${fileName}\n * version: v${pkg.version}\n */`
       return banner
     }),
     VitePluginBrowserSync({
-      dev: {
-        enable: false
-      },
-      buildWatch: {
-        enable: true,
-        bs: {
-          ghostMode: false,
-          host: 'localhost',
-          port: 8008,
-          proxy: 'https://stanford-b2b.lndo.site'
-          // ui: false,
-          // open: true
-        }
-      }
+      dev: { enable: false },
+      preview: { enable: false },
+      buildWatch: { enable: true, ...bsOptions },
     })
   ]
 })
