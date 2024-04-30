@@ -2,6 +2,7 @@
 
 - `npm run build` compiles and optimizes the output
 - `npm start` watches files for changes in any linked files (`import from...` or `background-image:...`), and compiles the results to `dist/`. Also starts a browsersync instance with a proxy to a lando server
+- `npm run storybook` launches the storybook ui in a browser.
 
 ## Notes
 
@@ -20,4 +21,4 @@
 
 - [x] `npm start` runs the watch task and starts a browsersync instance with a proxy to a lando server
 - [x] remove empty build files (`[name]/[name].js`) for css-only components
-- [ ] add storybook config
+- [x] add storybook config
