@@ -1,7 +1,7 @@
 # Quick Start
 
 - `npm run build` compiles and optimizes the output
-
+- `npm run watch` watches files for changes in [`components`,`less`,`images`], and compiles the results to `dist/`
 ## Notes
 
 * `components` are expected to follow the conventions from https://github.com/bryanbuchs/generator-component (`yo generate component`)
@@ -17,5 +17,4 @@
 
 ## TODO
 
-- [ ] `npm run watch` watches files for changes in `components`, and compiles the results to `dist/`
 - [ ] `npm start` runs the watch task and starts a browsersync instance with a proxy to a lando server

@@ -1,19 +1,16 @@
 .entity-card {
-  // style stuff
   background: @background;
   color: @text-color;
 
-  .media {
+  .local {
+    // image specific to this component
     background-image: url(photo.jpg);
     background-repeat: no-repeat;
   }
 
-  a {
-    color: @link-color;
-
-    &:hover,
-    &:focus {
-      color: @hover-color;
-    }
+  .shared {
+    // shared image
+    background-image: url(../../images/logoipsum.png);
+    background-repeat: no-repeat;
   }
 }

@@ -4,7 +4,8 @@
   "description": "simple webpack demo, single entry/output",
   "main": "index.js",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "watch": "vite build --watch"
   },
   "author": "bryan@kapowinc.com",
   "devDependencies": {

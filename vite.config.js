@@ -48,6 +48,9 @@ export default defineConfig({
     publicPath: '',
     reportCompressedSize: false,
     sourcemap: true,
+    watch: {
+      include: ['components/**/*', 'images/**/*', 'less/**/*']
+    },
     rollupOptions: {
       input: entries,
       output: {
