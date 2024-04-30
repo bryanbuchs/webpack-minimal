@@ -1,11 +1,21 @@
-# Base Webpack Config
+# Quick Start
 
-- `npm start` watches files for changes in `src`,  and compiles the results to `dist/`
 - `npm run build` compiles and optimizes the output
 
-## Build
+## Notes
 
-* Webpack will look for `src/**/index.js` files and the results of each will be compiled to their own `dist` files. 
+* `components` are expected to follow the conventions from https://github.com/bryanbuchs/generator-component (`yo generate component`)
+* Vite will look for `components/**/*.library.js` files and the results of each will be compiled to their own `dist` files.
 * The mixin and settings files in the root `less` directory are automatically loaded when processing LESS.
 * Images smaller than 10kb referenced in CSS/LESS will be inlined as data-url in the compiled CSS.
-* SVGs can be inlined the same way, or by using [postcss-inline-svg](https://github.com/TrySound/postcss-inline-svg) if fill/stroke colors need to be adjusted per-rule.
+* SVGs can be inlined the same way, or by using [postcss-inline-svg](https://github.com/bryanbuchs/postcss-inline-svg) if fill/stroke colors need to be adjusted per-rule.
+* `postcss-inline-svg` will look for SVGs at these paths, in order:
+  * same directory as the component
+  * the shared `/images` folder
+  * installed in `node_modules`
+  * A FontAwesome icon, using the pattern `[solid|regular|brands]/[icon].svg`
+
+## TODO
+
+- [ ] `npm run watch` watches files for changes in `components`, and compiles the results to `dist/`
+- [ ] `npm start` runs the watch task and starts a browsersync instance with a proxy to a lando server
