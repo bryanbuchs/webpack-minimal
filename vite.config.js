@@ -3,7 +3,7 @@ import fs from 'fs'
 import path from 'path'
 import { defineConfig } from 'vite'
 
-function getEntries (dir, parent = '') {
+function getEntries(dir, parent = '') {
   let entries = {}
   const files = fs.readdirSync(dir)
 
@@ -28,12 +28,12 @@ const entries = getEntries(componentsDir)
 // get a list of the folders in the /less/ directory and set up
 // an @import statement for each one using the glob plugin to
 // import all .less files in each folder
-function getLessImports () {
+function getLessImports() {
   const lessDir = path.resolve(__dirname, 'less')
   const imports = fs
     .readdirSync(lessDir)
-    .filter(file => fs.statSync(path.join(lessDir, file)).isDirectory())
-    .map(dir => `@import (reference) './less/${dir}/*.less';`)
+    .filter((file) => fs.statSync(path.join(lessDir, file)).isDirectory())
+    .map((dir) => `@import (reference) './less/${dir}/*.less';`)
 
   return imports.join('\n')
 }
@@ -43,16 +43,19 @@ const globalLessVars = getLessImports()
 export default defineConfig({
   base: './',
   build: {
+    cssCodeSplit: true,
     minify: false,
+    publicPath: '',
+    reportCompressedSize: false,
+    sourcemap: true,
     rollupOptions: {
       input: entries,
       output: {
         dir: 'dist',
         entryFileNames: '[name]/[name].js',
         chunkFileNames: '[name]/[name].js',
-        assetFileNames: assetInfo => {
+        assetFileNames: (assetInfo) => {
           // set an output path for each asset depending on the file extension
-
           const extension = path.extname(assetInfo.name).slice(1)
           let fileNames = '[name]'
 
@@ -73,18 +76,16 @@ export default defineConfig({
           return `${fileNames}/[name].[ext]`
         }
       }
-    },
-    reportCompressedSize: false,
-    sourcemap: true,
-    publicPath: '',
-    cssCodeSplit: true
+    }
   },
   css: {
+    devSourcemap: true,
     preprocessorOptions: {
       less: {
+        additionalData: globalLessVars,
         math: 'strict',
         plugins: [require('less-plugin-glob')],
-        additionalData: globalLessVars
+        sourceMap: true
       }
     }
   }
