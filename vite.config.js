@@ -43,6 +43,7 @@ const globalLessVars = getLessImports()
 export default defineConfig({
   base: './',
   build: {
+    minify: false,
     rollupOptions: {
       input: entries,
       output: {
@@ -83,7 +84,7 @@ export default defineConfig({
       less: {
         math: 'strict',
         plugins: [require('less-plugin-glob')],
-        additionalData: `${globalLessVars}`
+        additionalData: globalLessVars
       }
     }
   }
