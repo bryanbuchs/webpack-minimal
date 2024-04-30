@@ -1,18 +1,36 @@
-// Add this function to your build script
-function removeEmptyFiles(directory) {
-  const files = fs.readdirSync(directory);
+// post-build.js
+
+const fs = require('fs')
+const path = require('path')
+
+function isOnlyComments(content) {
+  const noInlineComments = content.replace(/\/\/.*/g, '').trim()
+  const noBlockComments = noInlineComments
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .trim()
+  return noBlockComments.length === 0
+}
+
+function removeCommentOnlyFiles(directory) {
+  const files = fs.readdirSync(directory)
 
   for (const file of files) {
-    const fullPath = path.join(directory, file);
-    const stat = fs.statSync(fullPath);
+    const fullPath = path.join(directory, file)
+    const stat = fs.statSync(fullPath)
 
     if (stat.isDirectory()) {
-      removeEmptyFiles(fullPath);
-    } else if (stat.size === 0) {
-      fs.unlinkSync(fullPath);
+      removeCommentOnlyFiles(fullPath)
+    } else if (fullPath.endsWith('.js')) {
+      const content = fs.readFileSync(fullPath, 'utf-8')
+      if (isOnlyComments(content)) {
+        fs.unlinkSync(fullPath)
+        // console.log(`Removed empty ${fullPath}`)
+        // if (fs.existsSync(mapPath)) {
+        //   fs.unlinkSync(mapPath)
+        // }
+      }
     }
   }
 }
 
-// Call this function after your build process
-removeEmptyFiles('./dist');
+removeCommentOnlyFiles('./dist')

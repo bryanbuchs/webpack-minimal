@@ -46,7 +46,8 @@ const bsOptions = {
     ghostMode: false,
     host: 'localhost',
     port: 8008,
-    proxy: 'https://stanford-b2b.lndo.site'
+    proxy: 'https://stanford-b2b.lndo.site',
+    open: true
   }
 }
 
@@ -57,7 +58,7 @@ export default defineConfig({
     minify: false,
     publicPath: '',
     reportCompressedSize: false,
-    sourcemap: true,
+    // sourcemap: true,
     rollupOptions: {
       input: entries,
       output: {
@@ -89,13 +90,13 @@ export default defineConfig({
     }
   },
   css: {
-    devSourcemap: true,
+    // devSourcemap: true,
     preprocessorOptions: {
       less: {
         additionalData: getLessImports(),
         math: 'strict',
         plugins: [require('less-plugin-glob')],
-        sourceMap: true
+        // sourceMap: true
       }
     }
   },

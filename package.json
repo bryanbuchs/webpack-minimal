@@ -4,12 +4,14 @@
   "description": "simple webpack demo, single entry/output",
   "main": "index.js",
   "scripts": {
-    "build": "vite build",
-    "start": "vite build --watch"
+    "build": "vite build && node post-build.js",
+    "cleanup": "node post-build.js",
+    "start": "vite build --watch & chokidar 'dist/**/*' -c 'node post-build.js' -s > /dev/null 2>&1"
   },
   "author": "bryan@kapowinc.com",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
+    "chokidar-cli": "^3.0.0",
     "less": "^4.2.0",
     "less-plugin-glob": "^3.0.0",
     "postcss": "^8.4.38",
